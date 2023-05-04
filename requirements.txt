@@ -1,0 +1,10 @@
+pandas
+tensorboard
+pyyaml
+yacs
+timm==0.6.7
+torch==1.12.1
+Pillow
+torchvision==0.13.1
+pytorch-metric-learning
+termcolor
