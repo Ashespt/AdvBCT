@@ -1,0 +1,25 @@
+MULTIPROCESSING_DISTRIBUTED: True
+DIST_URL: 'tcp://127.0.0.1:23456'
+DISTRIBUTED: True
+TAG: '30class'
+
+MODEL:
+  ARCH: 'resnet18'
+  NUM_CLASSES: 24393
+  PRETRAINED: True
+  
+TRAIN:
+  DATASET_TYPE: 'landmark'
+  DATASET: 'gldv2'
+  ROOT: './data/GLDv2'
+  FILE_DIR: './data/GLDv2/gldv2_train_old_30percent_class.txt'
+  BATCH_SIZE: 256
+  EPOCHS: 30
+  VAL_FREQ: 1
+  INPUT_SIZE: 224
+
+EVAL:
+  DATASET: 'rparis6k'
+  ROOT: './data/ROxfordParis/'
+  SAVE_DIR: './logs/eval/old_resnet18_30class'
+  PRINT_FREQ: 10

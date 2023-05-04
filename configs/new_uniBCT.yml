@@ -1,0 +1,48 @@
+MULTIPROCESSING_DISTRIBUTED: True
+DIST_URL: 'tcp://127.0.0.1:23468'
+DISTRIBUTED: True
+TAG: '100class_uniBCT'
+OUTPUT: 'output'
+
+LOSS:
+  TYPE: 'softmax'
+
+MODEL:
+  ARCH: 'resnet18_resnet18'
+  NUM_CLASSES: 81313
+
+OLD_MODEL:
+  ARCH: 'resnet18'
+  NUM_CLASSES: 24393
+  PRETRAINED_PATH: './output/final_model/resnet18_oldmodel_30class_epoch10.pth.tar'
+#  PRETRAINED: True
+
+NEW_MODEL:
+  ARCH: 'resnet18'
+  NUM_CLASSES: 81313
+  PRETRAINED: True
+
+COMP_LOSS:
+  TYPE: 'uni_bct'
+
+UPGRADE_LOSS:
+  TYPE: 'base' # ['center_limit','base']
+  WEIGHT: 1
+
+TRAIN:
+  DATASET_TYPE: 'landmark'
+  DATASET: 'gldv2'
+  ROOT: './data/GLDv2'
+  FILE_DIR: './data/GLDv2/gldv2_train_new_100percent_class.txt'
+  BATCH_SIZE: 256
+  EPOCHS: 30
+  VAL_FREQ: 1
+  TYPE: 'compatible'
+  INPUT_SIZE: 224
+
+EVAL:
+  DATASET: 'rparis6k'
+  ROOT: './data/ROxfordParis/'
+  SAVE_DIR: './logs/eval/100class_uniBCT'
+  PRINT_FREQ: 10
+  OLD_SAVE_FILE: ./preprocess/center/gldv2_470369_meta_radius_centernorm.json

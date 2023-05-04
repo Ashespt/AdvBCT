@@ -1,0 +1,40 @@
+MULTIPROCESSING_DISTRIBUTED: False
+DIST_URL: 'tcp://127.0.0.1:23455'
+DISTRIBUTED: True
+TAG: '100class_comp'
+
+MODEL:
+  NUM_CLASSES: 81313
+  ARCH: 'resnet50_resne50'
+  PRETRAINED: True
+
+OLD_MODEL:
+  NUM_CLASSES: 24393
+  ARCH: 'resnet50'
+  PRETRAINED_PATH: './output/final_model/resnet50_oldmodel_30class_epoch22.pth.tar'
+  PRETRAINED: True
+
+NEW_MODEL:
+  ARCH: 'resnet50'
+  NUM_CLASSES: 81313
+  PRETRAINED: True
+
+COMP_LOSS:
+  TYPE: hot_refresh
+
+TRAIN:
+  DATASET_TYPE: 'landmark'
+  DATASET: 'gldv2'
+  ROOT: './data/GLDv2'
+  FILE_DIR: './data/GLDv2/label_81313.txt'
+  BATCH_SIZE: 256
+  EPOCHS: 30
+  VAL_FREQ: 1
+  TYPE: 'compatible'
+  INPUT_SIZE: 224
+
+EVAL:
+  DATASET: 'rparis6k'
+  ROOT: './data/eval_test/'
+  SAVE_DIR: './logs/eval/resnet50_100data_resnet50_com'
+  PRINT_FREQ: 10
